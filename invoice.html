@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <title>MMS Invoice</title>
+    <style>
+      body {
+        background-color: hsla(0, 14%, 95%, 0.9);
+      }
+      .mms-invoice {
+        background-color: #2b3a7e;
+        color: white;
+        padding-bottom: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      .mms-form-group {
+        display: flex;
+        align-items: center !important;
+      }
+      .mms-form-group label {
+        text-align: right;
+        padding-right: 10px;
+        width: 120px;
+      }
+
+      .mms-form-group .data-field {
+        border: 1px solid white;
+        background-color: white;
+        color: #2b3a7e;
+        font-size: 10px;
+        width: 40%;
+        padding: 1px;
+      }
+
+      .mms-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .mms-td,
+      .mms-th {
+        font-size: 8px;
+        border: 1px solid #ddd;
+        padding: 2px;
+      }
+
+      .mms-th {
+        width: 18%;
+        background-color: #2b3a7e;
+        color: white;
+      }
+
+      .mstable {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .msth {
+        background-color: #f2f2f2;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .msdescription {
+        width: 50%;
+        background-color: #2b3a7e;
+        color: white;
+        text-align: center;
+        font-size: 8px;
+      }
+      .mssubtotal {
+        background-color: #2b3a7e;
+        color: white;
+        text-align: center;
+        font-size: 8px;
+      }
+
+      .msquantity,
+      .msprice {
+        width: 10%;
+        background-color: #2b3a7e;
+        color: white;
+        text-align: center;
+        font-size: 8px;
+      }
+
+      .mstotal-amount {
+        width: 20%;
+        background-color: #2b3a7e;
+        color: white;
+        text-align: center;
+        font-size: 8px;
+      }
+
+      .mstd,
+      .msth {
+        font-size: 8px;
+        border: 1px solid #ddd;
+        padding: 2px;
+      }
+
+      .mms-display-flex {
+        display: flex;
+        align-items: center;
+      }
+
+      .mms-margin-right-5 {
+        margin-right: 5px;
+      }
+
+      .mms-font-size-12 {
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .mms-margin-0 {
+        margin: 0;
+      }
+
+      .mms-font-size-8 {
+        font-size: 7px;
+        font-weight: 500;
+      }
+      .mms-last {
+        border-bottom: 1.5px dashed #2b3a7e;
+        /* margin-bottom: 5px; */
+      }
+      .mms-design {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        top: -45px;
+        left: 85px;
+        z-index: 0;
+        transform: rotate(45deg);
+        background-color: #2b3a7e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="btn btn-primary btn-sm mx-2 my-2" onclick="generatePDF()">
+      Download PDF
+    </button>
+    <div id="ms-Invoice">
+      <div>
+        <div class="container-fluid mms-invoice px-4 pt-2">
+          <div class="d-flex">
+            <div>
+              <img
+                src="invoicelogo.png"
+                alt=""
+                class="img-fluid"
+                width="120px"
+              />
+            </div>
+            <div class="container">
+              <hr style="border-top: 1px dashed white" />
+            </div>
+          </div>
+
+          <div class="d-flex mt-2">
+            <div class="w-50">
+              <p
+                class="font-weight-bold"
+                style="font-size: 15px; letter-spacing: 2px"
+              >
+                COMMERCIAL <br />INVOICE
+              </p>
+            </div>
+            <div class="w-75" style="border-left: 1px dashed white">
+              <form>
+                <div class="mms-form-group d-flex">
+                  <label for="invoiceNumber" style="font-size: 10px"
+                    >Invoice Number</label
+                  >
+                  <div class="data-field" id="invoiceNumber">123456789</div>
+                </div>
+                <div class="mms-form-group d-flex">
+                  <label for="invoiceDate" style="font-size: 10px"
+                    >Invoice Date</label
+                  >
+                  <div class="data-field" id="invoiceDate">123456789</div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="mms-design">fhj</div>
+
+        <div class="container-fluid px-4">
+          <table class="mms-table">
+            <tbody>
+              <tr>
+                <th class="mms-th">Bill To</th>
+                <td class="mms-td">1156115</td>
+              </tr>
+              <tr>
+                <th class="mms-th">Address</th>
+                <td class="mms-td">1156115</td>
+              </tr>
+              <tr>
+                <th class="mms-th">Phone</th>
+                <td class="mms-td">1156115</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="container-fluid px-4 mt-4">
+          <table class="mstable">
+            <thead>
+              <tr>
+                <th class="msth msdescription">Description</th>
+                <th class="msth msquantity">Quantity</th>
+                <th class="msth msprice">Price</th>
+                <th class="msth mstotal-amount">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mstd">Product 1</td>
+                <td class="mstd">2</td>
+                <td class="mstd">$10.00</td>
+                <td class="mstd">$20.00</td>
+              </tr>
+              <tr>
+                <td class="mstd">Product 2</td>
+                <td class="mstd">1</td>
+                <td class="mstd">$15.00</td>
+                <td class="mstd">$15.00</td>
+              </tr>
+              <tr>
+                <td class="mstd">Product 3</td>
+                <td class="mstd">5</td>
+                <td class="mstd">$20.00</td>
+                <td class="mstd">$100.00</td>
+              </tr>
+              <tr>
+                <td class="mstd">Product 4</td>
+                <td class="mstd">4</td>
+                <td class="mstd">$20.00</td>
+                <td class="mstd">$100.00</td>
+              </tr>
+              <tr>
+                <td class="mstd">Product 5</td>
+                <td class="mstd">3</td>
+                <td class="mstd">$20.00</td>
+                <td class="mstd">$100.00</td>
+              </tr>
+              <tr>
+                <td class="mstd">Product 6</td>
+                <td class="mstd">8</td>
+                <td class="mstd">$20.00</td>
+                <td class="mstd">$100.00</td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th colspan="3" class="msth mssubtotal">TOTAL</th>
+                <th class="mstd"></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="container-fluid px-4 mt-3">
+          <p style="display: flex; justify-content: end; font-size: 8px">
+            Date:November 12,2024
+          </p>
+        </div>
+
+        <div class="container-fluid px-4">
+          <img
+            src="paid.jpg"
+            class="img-fluid"
+            width="70px"
+            style="float: right; position: relative; top: -10px; right: 15px"
+            alt=""
+          />
+        </div>
+
+        <div
+          class="container-fluid px-4 d-flex justify-content-around mms-last"
+        >
+          <div class="mms-display-flex">
+            <div class="mms-margin-right-5">
+              <span class="material-symbols-outlined mms-font-size-12"
+                >contact_mail</span
+              >
+            </div>
+            <div>
+              <p class="mms-margin-0 mms-font-size-8">support@quiqpro.com</p>
+            </div>
+          </div>
+          <div class="mms-display-flex">
+            <div class="mms-margin-right-5">
+              <span class="material-symbols-outlined mms-font-size-12"
+                >public</span
+              >
+            </div>
+            <div>
+              <p class="mms-margin-0 mms-font-size-8">https://quiqpro.com/</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function generatePDF() {
+        const element = document.getElementById("ms-Invoice");
+        html2pdf().from(element).save();
+      }
+    </script>
+  </body>
+</html>
